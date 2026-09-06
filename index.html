@@ -1,26 +1,1828 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="favicon.png">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    * {
-      font-family: 'Montserrat', sans-serif;
-      box-sizing: border-box;
-      outline: none;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
-  <title>Kosther</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOSTHER | Pide más</title>
+    <link rel="shortcut icon" href="favicon.png">
+    
+    <!-- Tipografías de marca -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --amarillo: #FEC101;
+            --blanco: #FFFFFF;
+            --crema: #F7EBDF;
+            --negro: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--crema);
+            color: var(--negro);
+            line-height: 1.4;
+        }
+
+        /* Tipografías de marca */
+        .font-kosther {
+            font-family: 'Montserrat Alternates', sans-serif;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .cat-kosther-font {
+            font-family: 'Montserrat Alternates', sans-serif;
+            font-weight: 800;
+        }
+
+        .prod-title-kosther {
+            font-family: 'Montserrat Alternates', sans-serif;
+            font-weight: 800;
+        }
+
+        .prod-title-standard {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        .icon-svg {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            stroke-width: 2.2;
+            stroke: currentColor;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            vertical-align: middle;
+        }
+
+        /* Header con animación de ocultamiento al hacer scroll */
+        header {
+            background-color: var(--negro);
+            color: var(--amarillo);
+            padding: 12px 16px;
+            border-bottom: 4px solid var(--amarillo);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        header.header-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Layout mobile-first: título centrado arriba, botones centrados abajo */
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-box {
+            text-align: center;
+        }
+
+        .logo-box h1 {
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+
+        .logo-box p {
+            margin: 2px 0 0 0;
+            font-size: 0.7rem;
+            color: var(--blanco);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .header-acciones {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            width: 100%;
+        }
+
+        /* Badge sutil de puntos */
+        .badge-puntos {
+            background-color: var(--negro);
+            color: var(--amarillo);
+            border: 2px solid var(--amarillo);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 2px 2px 0px var(--negro);
+        }
+
+        .btn-cart-nav {
+            background-color: var(--amarillo);
+            color: var(--negro);
+            border: 2px solid var(--negro);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 2px 2px 0px var(--blanco);
+        }
+
+        .btn-cart-nav:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        .cart-badge {
+            background-color: var(--negro);
+            color: var(--blanco);
+            border-radius: 12px;
+            padding: 2px 7px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        /* Banner */
+        .banner-section {
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            border-bottom: 3px solid var(--negro);
+            background-color: var(--negro);
+        }
+
+        .banner-responsive {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Menú Circular de Categorías */
+        .menu-categorias-seccion {
+            padding: 20px 16px 10px 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-categorias-track {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .menu-cat-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--negro);
+            flex: 1;
+            min-width: 72px;
+            max-width: 95px;
+            text-align: center;
+        }
+
+        .menu-cat-circulo {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: var(--amarillo);
+            border: 3px solid var(--negro);
+            box-shadow: 3px 3px 0px var(--negro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .menu-cat-circulo .icon-svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--negro);
+        }
+
+        .menu-cat-btn:active .menu-cat-circulo {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--negro);
+        }
+
+        .menu-cat-nombre {
+            font-size: 0.72rem;
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--negro);
+        }
+
+        /* Catálogo */
+        main {
+            padding: 10px 0 30px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .seccion-categoria {
+            margin-bottom: 28px;
+            scroll-margin-top: 110px;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            margin-bottom: 12px;
+        }
+
+        .category-header h2 {
+            font-size: 1.05rem;
+            background-color: var(--negro);
+            color: var(--amarillo);
+            padding: 7px 14px;
+            border-radius: 8px;
+            border: 2px solid var(--amarillo);
+            box-shadow: 3px 3px 0px var(--negro);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .carousel-arrows {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-arrow {
+            background-color: var(--blanco);
+            border: 2px solid var(--negro);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 0px var(--negro);
+        }
+
+        .btn-arrow:active {
+            transform: translate(1px, 1px);
+            box-shadow: none;
+        }
+
+        /* Carruseles Horizontales */
+        .carousel-track {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 6px 16px 16px 16px;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .carousel-track::-webkit-scrollbar-thumb {
+            background: var(--negro);
+            border-radius: 4px;
+        }
+
+        .carousel-track::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Tarjeta de Producto */
+        .producto {
+            flex: 0 0 245px;
+            scroll-snap-align: start;
+            background-color: var(--blanco);
+            border: 3px solid var(--negro);
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 4px 4px 0px var(--amarillo);
+        }
+
+        .producto-img-box {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: var(--negro);
+            border: 2px solid var(--negro);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .producto-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .producto h3 {
+            font-size: 1.02rem;
+            margin-bottom: 4px;
+            line-height: 1.22;
+        }
+
+        .producto-presentacion {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: #555555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .producto-desc {
+            font-size: 0.8rem;
+            color: #444444;
+            margin-bottom: 10px;
+            flex-grow: 1;
+        }
+
+        /* Chips de Precios */
+        .chips-precios {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .chip-precio {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 8px;
+            border-radius: 6px;
+            border: 2px solid var(--negro);
+            font-size: 0.8rem;
+        }
+
+        .chip-menor {
+            background-color: var(--blanco);
+            color: var(--negro);
+            font-weight: 700;
+        }
+
+        .chip-mayor {
+            background-color: var(--amarillo);
+            color: var(--negro);
+            font-weight: 800;
+        }
+
+        .chip-mayor-condicion {
+            font-size: 0.68rem;
+            color: #333333;
+            font-weight: 600;
+        }
+
+        .btn-agregar {
+            background-color: var(--amarillo);
+            color: var(--negro);
+            border: 2px solid var(--negro);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 2px 2px 0px var(--negro);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-agregar.btn-agregado {
+            background-color: #0b7a26;
+            color: var(--blanco);
+            border-color: var(--negro);
+        }
+
+        .btn-agregar:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        /* Modal Lateral de Pedido / Historial */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: flex-end;
+            z-index: 200;
+        }
+
+        .cart-overlay.active {
+            display: flex;
+        }
+
+        .cart-modal {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            background-color: var(--blanco);
+            border-left: 3px solid var(--negro);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .modal-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--negro);
+            padding-bottom: 8px;
+        }
+
+        .tab-btn {
+            background-color: var(--crema);
+            border: 2px solid var(--negro);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn.active {
+            background-color: var(--amarillo);
+            box-shadow: 2px 2px 0px var(--negro);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--negro);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+
+        .cart-header h3 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-cerrar {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* Notificación de Puntos en Checkout */
+        .puntos-card {
+            border: 2px solid var(--negro);
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-bottom: 12px;
+            font-size: 0.82rem;
+            display: none;
+        }
+
+        .puntos-card.visible {
+            display: block;
+        }
+
+        .puntos-ganados {
+            color: #0b7a26;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .puntos-perdidos {
+            color: #b00;
+            font-weight: 800;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            background-color: #fff2f2;
+            padding: 6px;
+            border-radius: 6px;
+            border: 1px solid #b00;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            margin-bottom: 16px;
+        }
+
+        .cart-item {
+            border: 2px solid var(--negro);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #FAFAFA;
+            box-shadow: 2px 2px 0px var(--amarillo);
+        }
+
+        .item-info-top {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 800;
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+        }
+
+        .item-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-qty {
+            background-color: var(--amarillo);
+            border: 2px solid var(--negro);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-status-mayor {
+            font-size: 0.74rem;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        .status-descuento {
+            color: #0b7a26;
+        }
+
+        .status-falta {
+            color: #666666;
+        }
+
+        /* Formulario de Checkout */
+        .checkout-section {
+            border-top: 3px solid var(--negro);
+            padding-top: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 800;
+            font-size: 0.78rem;
+            margin-bottom: 3px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 9px 10px;
+            border: 2px solid var(--negro);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            background-color: var(--crema);
+            outline: none;
+        }
+
+        .form-group input:focus {
+            background-color: var(--blanco);
+            box-shadow: 2px 2px 0px var(--amarillo);
+        }
+
+        .resumen-totales {
+            background-color: var(--crema);
+            border: 2px solid var(--negro);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 12px 0;
+        }
+
+        .linea-resumen {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin-bottom: 4px;
+        }
+
+        .linea-ahorro {
+            color: #0b7a26;
+            font-weight: 800;
+        }
+
+        .linea-total-final {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.15rem;
+            font-weight: 900;
+            border-top: 2px dashed var(--negro);
+            padding-top: 6px;
+            margin-top: 6px;
+        }
+
+        .btn-comprar-whatsapp {
+            background-color: var(--amarillo);
+            color: var(--negro);
+            border: 3px solid var(--negro);
+            border-radius: 10px;
+            padding: 13px;
+            font-size: 0.95rem;
+            font-weight: 900;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 3px 3px 0px var(--negro);
+        }
+
+        .btn-comprar-whatsapp:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        /* Vista de Gestión de Pedidos */
+        .order-card {
+            border: 2px solid var(--negro);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 12px;
+            background-color: #FAFAFA;
+            box-shadow: 3px 3px 0px var(--negro);
+        }
+
+        .order-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+
+        .order-status-tag {
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 12px;
+            border: 1px solid var(--negro);
+            text-transform: uppercase;
+        }
+
+        .status-pendiente {
+            background-color: var(--amarillo);
+            color: var(--negro);
+        }
+
+        .status-recibido {
+            background-color: #0b7a26;
+            color: var(--blanco);
+        }
+
+        .status-cancelado {
+            background-color: #d32f2f;
+            color: var(--blanco);
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-order-action {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid var(--negro);
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.78rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .btn-confirmar-recibido {
+            background-color: #0b7a26;
+            color: var(--blanco);
+        }
+
+        .btn-cancelar-pedido {
+            background-color: #fbe9e7;
+            color: #d32f2f;
+        }
+
+        .btn-nuevo-pedido {
+            background-color: var(--amarillo);
+            color: var(--negro);
+            border: 2px solid var(--negro);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            width: 100%;
+            margin-top: 14px;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px var(--negro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--negro);
+            color: var(--blanco);
+            text-align: center;
+            padding: 35px 20px;
+            border-top: 5px solid var(--amarillo);
+        }
+
+        .footer-logo {
+            max-width: 170px;
+            height: auto;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            color: #CCCCCC;
+            font-weight: 500;
+            max-width: 380px;
+            margin: 0 auto;
+            line-height: 1.35;
+        }
+
+        /* En pantallas más grandes se distribuye de lado a lado */
+        @media (min-width: 640px) {
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .logo-box {
+                text-align: left;
+            }
+
+            .header-acciones {
+                width: auto;
+                justify-content: flex-end;
+            }
+
+            .cart-modal {
+                max-width: 460px;
+            }
+
+            .producto {
+                flex: 0 0 260px;
+            }
+
+            .menu-cat-circulo {
+                width: 68px;
+                height: 68px;
+            }
+
+            .menu-cat-circulo .icon-svg {
+                width: 30px;
+                height: 30px;
+            }
+
+            .menu-cat-nombre {
+                font-size: 0.82rem;
+            }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Cabecera con menú adaptativo y ocultamiento inteligente -->
+    <header id="main-header">
+        <div class="header-container">
+            <div class="logo-box">
+                <h1><span class="font-kosther">KOSTHER</span></h1>
+                <p>PIDE MÁS</p>
+            </div>
+            <div class="header-acciones">
+                <div class="badge-puntos" title="Tus puntos acumulados">
+                    <svg class="icon-svg" viewBox="0 0 24 24" style="width: 15px; height: 15px; stroke: var(--amarillo);">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <span id="header-puntos-val">0</span> pts
+                </div>
+                <button class="btn-cart-nav" onclick="abrirCarrito('pedidos')" aria-label="Ver Pedidos">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                    <span>Pedidos</span>
+                </button>
+                <button class="btn-cart-nav" onclick="abrirCarrito('carrito')" aria-label="Ver Carrito">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span>Carrito</span>
+                    <span class="cart-badge" id="cart-counter">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banners Responsive -->
+    <section class="banner-section">
+        <picture>
+            <source media="(min-width: 769px)" srcset="banner-desktop.png">
+            <img src="banner-mobile.png" alt="KOSTHER Banner" class="banner-responsive">
+        </picture>
+    </section>
+
+    <!-- Menú Circular de Categorías (Accesos Directos) -->
+    <section class="menu-categorias-seccion">
+        <nav class="menu-categorias-track">
+            <a href="#cat-drinks" class="menu-cat-btn">
+                <div class="menu-cat-circulo">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <path d="M6 8h12l-1.5 13H7.5L6 8z"></path>
+                        <line x1="5" y1="8" x2="19" y2="8"></line>
+                        <line x1="14" y1="2" x2="11" y2="8"></line>
+                    </svg>
+                </div>
+                <span class="menu-cat-nombre cat-kosther-font">KOSTHER Drinks</span>
+            </a>
+
+            <a href="#cat-seasoning" class="menu-cat-btn">
+                <div class="menu-cat-circulo">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <path d="M8 8h8v12a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V8z"></path>
+                        <path d="M9 5a3 3 0 0 1 6 0v3H9V5z"></path>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                </div>
+                <span class="menu-cat-nombre cat-kosther-font">KOSTHER Seasoning</span>
+            </a>
+
+            <a href="#cat-abarrotes" class="menu-cat-btn">
+                <div class="menu-cat-circulo">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <path d="M3 9h18l-2 11H5L3 9z"></path>
+                        <path d="M9 9V6a3 3 0 0 1 6 0v3"></path>
+                        <line x1="9" y1="13" x2="9" y2="17"></line>
+                        <line x1="15" y1="13" x2="15" y2="17"></line>
+                    </svg>
+                </div>
+                <span class="menu-cat-nombre">Abarrotes</span>
+            </a>
+
+            <a href="#cat-dulces" class="menu-cat-btn">
+                <div class="menu-cat-circulo">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="6"></circle>
+                        <path d="M12 5a3 3 0 0 1 3 3c0 1.5-1.5 2-3 2"></path>
+                        <line x1="12" y1="14" x2="12" y2="22"></line>
+                    </svg>
+                </div>
+                <span class="menu-cat-nombre">Dulces</span>
+            </a>
+        </nav>
+    </section>
+
+    <!-- Catálogo por Categorías con Carruseles -->
+    <main>
+        <!-- KOSTHER Drinks -->
+        <section class="seccion-categoria" id="cat-drinks">
+            <div class="category-header">
+                <h2 class="cat-kosther-font">
+                    <svg class="icon-svg" viewBox="0 0 24 24" style="stroke: var(--amarillo);">
+                        <path d="M6 8h12l-1.5 13H7.5L6 8z"></path>
+                        <line x1="5" y1="8" x2="19" y2="8"></line>
+                        <line x1="14" y1="2" x2="11" y2="8"></line>
+                    </svg>
+                    KOSTHER Drinks
+                </h2>
+                <div class="carousel-arrows">
+                    <button class="btn-arrow" onclick="scrollCarousel('track-drinks', -1)" aria-label="Anterior">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="btn-arrow" onclick="scrollCarousel('track-drinks', 1)" aria-label="Siguiente">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="carousel-track" id="track-drinks"></div>
+        </section>
+
+        <!-- KOSTHER Seasoning -->
+        <section class="seccion-categoria" id="cat-seasoning">
+            <div class="category-header">
+                <h2 class="cat-kosther-font">
+                    <svg class="icon-svg" viewBox="0 0 24 24" style="stroke: var(--amarillo);">
+                        <path d="M8 8h8v12a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V8z"></path>
+                        <path d="M9 5a3 3 0 0 1 6 0v3H9V5z"></path>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                    KOSTHER Seasoning
+                </h2>
+                <div class="carousel-arrows">
+                    <button class="btn-arrow" onclick="scrollCarousel('track-seasoning', -1)" aria-label="Anterior">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="btn-arrow" onclick="scrollCarousel('track-seasoning', 1)" aria-label="Siguiente">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="carousel-track" id="track-seasoning"></div>
+        </section>
+
+        <!-- Abarrotes -->
+        <section class="seccion-categoria" id="cat-abarrotes">
+            <div class="category-header">
+                <h2>
+                    <svg class="icon-svg" viewBox="0 0 24 24" style="stroke: var(--amarillo);">
+                        <path d="M3 9h18l-2 11H5L3 9z"></path>
+                        <path d="M9 9V6a3 3 0 0 1 6 0v3"></path>
+                        <line x1="9" y1="13" x2="9" y2="17"></line>
+                        <line x1="15" y1="13" x2="15" y2="17"></line>
+                    </svg>
+                    Abarrotes
+                </h2>
+                <div class="carousel-arrows">
+                    <button class="btn-arrow" onclick="scrollCarousel('track-abarrotes', -1)" aria-label="Anterior">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="btn-arrow" onclick="scrollCarousel('track-abarrotes', 1)" aria-label="Siguiente">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="carousel-track" id="track-abarrotes"></div>
+        </section>
+
+        <!-- Dulces -->
+        <section class="seccion-categoria" id="cat-dulces">
+            <div class="category-header">
+                <h2>
+                    <svg class="icon-svg" viewBox="0 0 24 24" style="stroke: var(--amarillo);">
+                        <circle cx="12" cy="8" r="6"></circle>
+                        <path d="M12 5a3 3 0 0 1 3 3c0 1.5-1.5 2-3 2"></path>
+                        <line x1="12" y1="14" x2="12" y2="22"></line>
+                    </svg>
+                    Dulces
+                </h2>
+                <div class="carousel-arrows">
+                    <button class="btn-arrow" onclick="scrollCarousel('track-dulces', -1)" aria-label="Anterior">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="btn-arrow" onclick="scrollCarousel('track-dulces', 1)" aria-label="Siguiente">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="carousel-track" id="track-dulces"></div>
+        </section>
+    </main>
+
+    <!-- Modal Lateral / Carrito & Historial de Pedidos -->
+    <div class="cart-overlay" id="cart-overlay">
+        <div class="cart-modal">
+            <div class="modal-tabs">
+                <button class="tab-btn active" id="tab-btn-carrito" onclick="cambiarVistaModal('carrito')">
+                    <svg class="icon-svg" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    Tu Pedido
+                </button>
+                <button class="tab-btn" id="tab-btn-pedidos" onclick="cambiarVistaModal('pedidos')">
+                    <svg class="icon-svg" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    Historial de Pedidos
+                </button>
+            </div>
+
+            <!-- VISTA 1: Carrito Actual -->
+            <div id="vista-carrito">
+                <div class="cart-header">
+                    <h3>
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Tu Pedido
+                    </h3>
+                    <button class="btn-cerrar" onclick="cerrarCarrito()" aria-label="Cerrar">
+                        <svg class="icon-svg" viewBox="0 0 24 24" style="width: 22px; height: 22px;">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="puntos-card" id="puntos-card-container"></div>
+
+                <div class="cart-items" id="cart-items-container"></div>
+
+                <div class="checkout-section">
+                    <div class="form-group">
+                        <label for="cliente-nombre">Nombre y Apellidos (*)</label>
+                        <input type="text" id="cliente-nombre" placeholder="Ingresa tu nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cliente-direccion">Dirección exacta (*)</label>
+                        <input type="text" id="cliente-direccion" placeholder="Ej. Av. Central 123, Ate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cliente-dni">DNI (Para acumular puntos y ofertas)</label>
+                        <input type="tel" id="cliente-dni" placeholder="Ej. 72819023">
+                    </div>
+
+                    <div class="resumen-totales">
+                        <div class="linea-resumen">
+                            <span>Subtotal por menor:</span>
+                            <span id="txt-subtotal">S/ 0.00</span>
+                        </div>
+                        <div class="linea-resumen linea-ahorro">
+                            <span>Ahorro por mayor:</span>
+                            <span id="txt-ahorro">- S/ 0.00</span>
+                        </div>
+                        <div class="linea-total-final">
+                            <span>TOTAL A PAGAR:</span>
+                            <span id="txt-total">S/ 0.00</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-comprar-whatsapp" onclick="finalizarCompra()">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                        Realizar Pedido por WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- VISTA 2: Confirmación y Gestión de Pedidos -->
+            <div id="vista-pedidos" style="display: none;">
+                <div class="cart-header">
+                    <h3>
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        Tus Pedidos Realizados
+                    </h3>
+                    <button class="btn-cerrar" onclick="cerrarCarrito()" aria-label="Cerrar">
+                        <svg class="icon-svg" viewBox="0 0 24 24" style="width: 22px; height: 22px;">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="pedidos-lista-container"></div>
+
+                <button class="btn-nuevo-pedido" onclick="iniciarNuevoPedido()">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Hacer otro pedido (Bolsa separada)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de Página Oficial -->
+    <footer>
+        <img src="marca-claro.png" alt="KOSTHER" class="footer-logo">
+        <p class="footer-copy">Venta de bebidas artesanales, abarrotes y confitería al por mayor y menor.</p>
+    </footer>
+
+    <!-- Lógica de Negocio -->
+    <script>
+        const catalogo = [
+            // KOSTHER Drinks
+            {
+                id: 'drink-limon',
+                nombre: 'Té Helado Clásico Limón & Canela',
+                esOriginal: true,
+                categoria: 'drinks',
+                presentacion: 'Presentación: 1 Litro',
+                descripcion: 'Infusión artesanal con limón sutil y canela selecta.',
+                precioBase: 3.50,
+                precioMayor: 3.00,
+                minMayor: 3,
+                imagen: 'productos/té y limón.png'
+            },
+            {
+                id: 'drink-hierbaluisa',
+                nombre: 'Hierba Luisa & Maracuyá Tropical',
+                esOriginal: true,
+                categoria: 'drinks',
+                presentacion: 'Presentación: 1 Litro',
+                descripcion: 'Hierba luisa fresca con pulpa colada de maracuyá maduro.',
+                precioBase: 3.50,
+                precioMayor: 3.00,
+                minMayor: 3,
+                imagen: 'productos/hierba luisa y maracuyá.png'
+            },
+            {
+                id: 'drink-maracuya',
+                nombre: 'Té Negro & Maracuyá',
+                esOriginal: true,
+                categoria: 'drinks',
+                presentacion: 'Presentación: 1 Litro',
+                descripcion: 'Cuerpo frutal oscuro y aromático con maracuyá colado.',
+                precioBase: 3.50,
+                precioMayor: 3.00,
+                minMayor: 3,
+                imagen: 'productos/té y maracuyá.png'
+            },
+            {
+                id: 'drink-jamaica',
+                nombre: 'Flor de Jamaica "Tutti-Frutti"',
+                esOriginal: true,
+                categoria: 'drinks',
+                presentacion: 'Presentación: 1 Litro',
+                descripcion: 'Extracto artesanal con piña madura, canela y membrillo.',
+                precioBase: 3.50,
+                precioMayor: 3.00,
+                minMayor: 3,
+                imagen: 'productos/jamaica.png'
+            },
+
+            // KOSTHER Seasoning
+            {
+                id: 'seasoning-endulzante',
+                nombre: 'Endulzante',
+                esOriginal: true,
+                categoria: 'seasoning',
+                presentacion: 'Presentación: Frasco 1 kg',
+                descripcion: 'Fórmula maestra de azúcar rubia con sal rosada fina para repostería e infusiones.',
+                precioBase: 6.00,
+                precioMayor: 5.00,
+                minMayor: 2,
+                imagen: 'productos/endulzante.png'
+            },
+
+            // Abarrotes
+            {
+                id: 'abarrote-papas',
+                nombre: "Papas al Hilo | Milet's",
+                esOriginal: false,
+                categoria: 'abarrotes',
+                presentacion: 'Presentación: Bolsa 1 kg',
+                descripcion: 'Papas seleccionadas extra crocantes y doradas al por mayor y menor.',
+                precioBase: 14.50,
+                precioMayor: 14.00,
+                minMayor: 2,
+                imagen: 'productos/papa al hilo.png'
+            },
+            {
+                id: 'abarrote-sal',
+                nombre: 'Sal Rosada Premium | Samber',
+                esOriginal: false,
+                categoria: 'abarrotes',
+                presentacion: 'Presentación: Bolsa 1 kg',
+                descripcion: 'Sal mineral gourmet pura de Cuzco para cocina diaria y parrillas.',
+                precioBase: 8.00,
+                precioMayor: 7.00,
+                minMayor: 2,
+                imagen: 'productos/sal rosada premium.png'
+            },
+
+            // Dulces
+            {
+                id: 'dulce-chaposo',
+                nombre: 'Paleta de Leche | Chaposos',
+                esOriginal: false,
+                categoria: 'dulces',
+                presentacion: 'Presentación: Unidad / Tira x10',
+                descripcion: 'Paleta dulce tradicional sabor a leche artesanal. A partir de 10 unidades precio por mayor.',
+                precioBase: 0.20,
+                precioMayor: 0.18,
+                minMayor: 10,
+                imagen: 'productos/paleta de leche.png'
+            }
+        ];
+
+        let carrito = {};
+        let pedidos = [];
+
+        // Renderizado del catálogo
+        function renderCatalogo() {
+            const tracks = {
+                drinks: document.getElementById('track-drinks'),
+                seasoning: document.getElementById('track-seasoning'),
+                abarrotes: document.getElementById('track-abarrotes'),
+                dulces: document.getElementById('track-dulces')
+            };
+
+            Object.values(tracks).forEach(track => { track.innerHTML = ''; });
+
+            catalogo.forEach(prod => {
+                const titleClass = prod.esOriginal ? 'prod-title-kosther' : 'prod-title-standard';
+                const card = document.createElement('div');
+                card.className = 'producto';
+                card.innerHTML = `
+                    <div>
+                        <div class="producto-img-box">
+                            <img src="${prod.imagen}" alt="${prod.nombre}" loading="lazy">
+                        </div>
+                        <h3 class="${titleClass}">${prod.nombre}</h3>
+                        <div class="producto-presentacion">${prod.presentacion}</div>
+                        <p class="producto-desc">${prod.descripcion}</p>
+                    </div>
+                    <div>
+                        <div class="chips-precios">
+                            <div class="chip-precio chip-menor">
+                                <span>Por menor:</span>
+                                <span>S/ ${prod.precioBase.toFixed(2)}</span>
+                            </div>
+                            <div class="chip-precio chip-mayor">
+                                <div>
+                                    <span>Por mayor:</span>
+                                    <div class="chip-mayor-condicion">(${prod.categoria === 'drinks' ? '3+ combinadas' : prod.minMayor + '+ u.'})</div>
+                                </div>
+                                <span>S/ ${prod.precioMayor.toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <button class="btn-agregar" id="btn-add-${prod.id}" onclick="agregarAlCarrito('${prod.id}')">
+                            <svg class="icon-svg" viewBox="0 0 24 24">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            <span>Agregar</span>
+                        </button>
+                    </div>
+                `;
+
+                if (tracks[prod.categoria]) {
+                    tracks[prod.categoria].appendChild(card);
+                }
+            });
+        }
+
+        function scrollCarousel(trackId, direction) {
+            const track = document.getElementById(trackId);
+            const scrollAmount = 260;
+            track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        // LocalStorage helpers
+        function guardarCarritoLocalStorage() {
+            localStorage.setItem('kosther_carrito', JSON.stringify(carrito));
+        }
+
+        function cargarCarritoLocalStorage() {
+            const guardado = localStorage.getItem('kosther_carrito');
+            if (guardado) {
+                try {
+                    carrito = JSON.parse(guardado);
+                } catch (e) {
+                    carrito = {};
+                }
+            }
+        }
+
+        function guardarPedidosLocalStorage() {
+            localStorage.setItem('kosther_pedidos', JSON.stringify(pedidos));
+        }
+
+        function cargarPedidosLocalStorage() {
+            const guardado = localStorage.getItem('kosther_pedidos');
+            if (guardado) {
+                try {
+                    pedidos = JSON.parse(guardado);
+                } catch (e) {
+                    pedidos = [];
+                }
+            }
+        }
+
+        function actualizarPuntosHeader() {
+            const puntosVal = parseInt(localStorage.getItem('kosther_puntos') || '0', 10);
+            const headerElem = document.getElementById('header-puntos-val');
+            if (headerElem) {
+                headerElem.textContent = puntosVal;
+            }
+        }
+
+        function agregarAlCarrito(id) {
+            carrito[id] = (carrito[id] || 0) + 1;
+            guardarCarritoLocalStorage();
+            actualizarCarrito();
+
+            const btn = document.getElementById(`btn-add-${id}`);
+            if (btn) {
+                btn.classList.add('btn-agregado');
+                btn.innerHTML = `
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>¡Agregado!</span>
+                `;
+                setTimeout(() => {
+                    btn.classList.remove('btn-agregado');
+                    btn.innerHTML = `
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>Agregar</span>
+                    `;
+                }, 1200);
+            }
+        }
+
+        function cambiarCantidad(id, delta) {
+            if (!carrito[id]) return;
+            carrito[id] += delta;
+            if (carrito[id] <= 0) {
+                delete carrito[id];
+            }
+            guardarCarritoLocalStorage();
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            const container = document.getElementById('cart-items-container');
+            const counter = document.getElementById('cart-counter');
+            container.innerHTML = '';
+
+            let totalItems = 0;
+            let subtotalRegular = 0;
+            let totalFinal = 0;
+            let ahorroTotal = 0;
+
+            const itemsKeys = Object.keys(carrito);
+
+            if (itemsKeys.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:#777; margin-top:25px; font-weight:600; font-size:0.85rem;">Tu pedido está vacío.<br>Agrega productos para acceder a tarifas al por mayor.</p>';
+            }
+
+            let totalDrinks = 0;
+            itemsKeys.forEach(id => {
+                const prod = catalogo.find(p => p.id === id);
+                if (prod && prod.categoria === 'drinks') {
+                    totalDrinks += carrito[id];
+                }
+            });
+
+            itemsKeys.forEach(id => {
+                const prod = catalogo.find(p => p.id === id);
+                if (!prod) return;
+
+                const cant = carrito[id];
+                totalItems += cant;
+
+                const costoRegular = cant * prod.precioBase;
+                let costoReal = 0;
+                let ahorroItem = 0;
+                let statusMayorHtml = '';
+
+                if (prod.categoria === 'drinks') {
+                    if (totalDrinks >= 3) {
+                        costoReal = cant * prod.precioMayor;
+                        ahorroItem = costoRegular - costoReal;
+                        statusMayorHtml = `
+                            <div class="item-status-mayor status-descuento">
+                                ✓ Tarifa al por mayor KOSTHER Drinks activada (${totalDrinks} bebidas combinadas)
+                            </div>`;
+                    } else {
+                        costoReal = costoRegular;
+                        const faltan = 3 - totalDrinks;
+                        statusMayorHtml = `
+                            <div class="item-status-mayor status-falta">
+                                Agrega ${faltan} bebida(s) más de cualquier sabor para pagar S/ 3.00 c/u
+                            </div>`;
+                    }
+                } else {
+                    if (cant >= prod.minMayor) {
+                        costoReal = cant * prod.precioMayor;
+                        ahorroItem = costoRegular - costoReal;
+                        statusMayorHtml = `
+                            <div class="item-status-mayor status-descuento">
+                                ✓ Precio al por mayor aplicado (Ahorraste S/ ${ahorroItem.toFixed(2)})
+                            </div>`;
+                    } else {
+                        costoReal = costoRegular;
+                        const faltan = prod.minMayor - cant;
+                        statusMayorHtml = `
+                            <div class="item-status-mayor status-falta">
+                                Agrega ${faltan} más para pagar S/ ${prod.precioMayor.toFixed(2)} c/u
+                            </div>`;
+                    }
+                }
+
+                subtotalRegular += costoRegular;
+                totalFinal += costoReal;
+                ahorroTotal += ahorroItem;
+
+                const itemElem = document.createElement('div');
+                itemElem.className = 'cart-item';
+                itemElem.innerHTML = `
+                    <div class="item-info-top">
+                        <span class="${prod.esOriginal ? 'prod-title-kosther' : 'prod-title-standard'}">${prod.nombre}</span>
+                        <span>S/ ${costoReal.toFixed(2)}</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="qty-controls">
+                            <button class="btn-qty" onclick="cambiarCantidad('${prod.id}', -1)" aria-label="Disminuir">-</button>
+                            <span style="font-weight:800; font-size:0.9rem;">${cant}</span>
+                            <button class="btn-qty" onclick="cambiarCantidad('${prod.id}', 1)" aria-label="Aumentar">+</button>
+                        </div>
+                        <span style="font-size:0.78rem; color:#666;">(S/ ${(costoReal / cant).toFixed(2)} c/u)</span>
+                    </div>
+                    ${statusMayorHtml}
+                `;
+                container.appendChild(itemElem);
+            });
+
+            counter.textContent = totalItems;
+            document.getElementById('txt-subtotal').textContent = `S/ ${subtotalRegular.toFixed(2)}`;
+            document.getElementById('txt-ahorro').textContent = `- S/ ${ahorroTotal.toFixed(2)}`;
+            document.getElementById('txt-total').textContent = `S/ ${totalFinal.toFixed(2)}`;
+
+            actualizarPuntosCard(totalFinal);
+        }
+
+        // Sistema de Puntos limpio
+        function actualizarPuntosCard(totalFinal) {
+            const container = document.getElementById('puntos-card-container');
+            const dni = document.getElementById('cliente-dni').value.trim();
+            const puntosPosibles = Math.floor(totalFinal * 10);
+
+            if (puntosPosibles <= 0) {
+                container.classList.remove('visible');
+                container.innerHTML = '';
+                return;
+            }
+
+            container.classList.add('visible');
+            if (dni) {
+                container.innerHTML = `
+                    <div class="puntos-ganados">
+                        <svg class="icon-svg" viewBox="0 0 24 24" style="stroke: #0b7a26;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>¡Ganarás <strong>+${puntosPosibles} puntos</strong> con este pedido!</span>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="puntos-perdidos">
+                        <svg class="icon-svg" viewBox="0 0 24 24" style="stroke: #b00; min-width: 18px; margin-top: 1px;">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <span>Estás perdiendo <strong>${puntosPosibles} puntos</strong> por no ingresar tu DNI. Ingresa tu DNI para acumular.</span>
+                    </div>
+                `;
+            }
+        }
+
+        function abrirCarrito(vista = 'carrito') {
+            document.getElementById('cart-overlay').classList.add('active');
+            cambiarVistaModal(vista);
+        }
+
+        function cerrarCarrito() {
+            document.getElementById('cart-overlay').classList.remove('active');
+        }
+
+        function cambiarVistaModal(vista) {
+            const vistaCarrito = document.getElementById('vista-carrito');
+            const vistaPedidos = document.getElementById('vista-pedidos');
+            const tabCarrito = document.getElementById('tab-btn-carrito');
+            const tabPedidos = document.getElementById('tab-btn-pedidos');
+
+            if (vista === 'carrito') {
+                vistaCarrito.style.display = 'block';
+                vistaPedidos.style.display = 'none';
+                tabCarrito.classList.add('active');
+                tabPedidos.classList.remove('active');
+            } else {
+                vistaCarrito.style.display = 'none';
+                vistaPedidos.style.display = 'block';
+                tabCarrito.classList.remove('active');
+                tabPedidos.classList.add('active');
+                renderPedidosLista();
+            }
+        }
+
+        // Carga inicial y persistencia garantizada de datos del cliente
+        function inicializarDatosCliente() {
+            const inputNombre = document.getElementById('cliente-nombre');
+            const inputDireccion = document.getElementById('cliente-direccion');
+            const inputDni = document.getElementById('cliente-dni');
+
+            inputNombre.value = localStorage.getItem('kosther_nombre') || '';
+            inputDireccion.value = localStorage.getItem('kosther_direccion') || '';
+            inputDni.value = localStorage.getItem('kosther_dni') || '';
+
+            inputNombre.addEventListener('input', (e) => localStorage.setItem('kosther_nombre', e.target.value.trim()));
+            inputDireccion.addEventListener('input', (e) => localStorage.setItem('kosther_direccion', e.target.value.trim()));
+            inputDni.addEventListener('input', (e) => {
+                localStorage.setItem('kosther_dni', e.target.value.trim());
+                const totalTxt = document.getElementById('txt-total').textContent.replace('S/', '').trim();
+                actualizarPuntosCard(parseFloat(totalTxt) || 0);
+            });
+        }
+
+        function finalizarCompra() {
+            const itemsKeys = Object.keys(carrito);
+            if (itemsKeys.length === 0) {
+                alert('Tu carrito está vacío. Agrega productos para continuar.');
+                return;
+            }
+
+            const nombre = document.getElementById('cliente-nombre').value.trim();
+            const direccion = document.getElementById('cliente-direccion').value.trim();
+            const dni = document.getElementById('cliente-dni').value.trim();
+
+            if (!nombre || !direccion) {
+                alert('Por favor completa tu nombre y dirección para despachar el pedido.');
+                return;
+            }
+
+            let subtotalRegular = 0;
+            let totalFinal = 0;
+            let ahorroTotal = 0;
+            let listaConcepto = '';
+            let detalleItems = [];
+
+            let totalDrinks = 0;
+            itemsKeys.forEach(id => {
+                const prod = catalogo.find(p => p.id === id);
+                if (prod && prod.categoria === 'drinks') {
+                    totalDrinks += carrito[id];
+                }
+            });
+
+            itemsKeys.forEach(id => {
+                const prod = catalogo.find(p => p.id === id);
+                if (!prod) return;
+
+                const cant = carrito[id];
+                const costoRegular = cant * prod.precioBase;
+                let costoReal = 0;
+                let ahorroItem = 0;
+
+                if (prod.categoria === 'drinks') {
+                    if (totalDrinks >= 3) {
+                        costoReal = cant * prod.precioMayor;
+                        ahorroItem = costoRegular - costoReal;
+                    } else {
+                        costoReal = costoRegular;
+                    }
+                } else {
+                    if (cant >= prod.minMayor) {
+                        costoReal = cant * prod.precioMayor;
+                        ahorroItem = costoRegular - costoReal;
+                    } else {
+                        costoReal = costoRegular;
+                    }
+                }
+
+                subtotalRegular += costoRegular;
+                totalFinal += costoReal;
+                ahorroTotal += ahorroItem;
+
+                detalleItems.push({
+                    nombre: prod.nombre,
+                    cantidad: cant,
+                    precioTotal: costoReal
+                });
+
+                listaConcepto += `- ${cant}x ${prod.nombre}: S/ ${costoReal.toFixed(2)}`;
+                if (ahorroItem > 0) {
+                    listaConcepto += ` [Ahorro: S/ ${ahorroItem.toFixed(2)}]`;
+                }
+                listaConcepto += `\n`;
+            });
+
+            const puntosGanados = Math.floor(totalFinal * 10);
+
+            // Registro del pedido y acreditación provisional de puntos
+            const nuevoPedido = {
+                id: 'KOS-' + Date.now().toString().slice(-4),
+                fecha: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                items: detalleItems,
+                total: totalFinal,
+                ahorro: ahorroTotal,
+                puntos: dni ? puntosGanados : 0,
+                puntosAcreditados: !!dni,
+                estado: 'En preparación'
+            };
+
+            pedidos.unshift(nuevoPedido);
+            guardarPedidosLocalStorage();
+
+            if (dni && puntosGanados > 0) {
+                const puntosPrevios = parseInt(localStorage.getItem('kosther_puntos') || '0', 10);
+                localStorage.setItem('kosther_puntos', (puntosPrevios + puntosGanados).toString());
+                actualizarPuntosHeader();
+            }
+
+            const mensaje = 
+`*PEDIDO KOSTHER - PIDE MAS*
+----------------------------------------
+CODIGO: ${nuevoPedido.id}
+CLIENTE: ${nombre}
+DIRECCION: ${direccion}
+DNI (OFERTAS): ${dni ? dni : 'No indicado'}
+${dni ? `PUNTOS DEL PEDIDO: +${puntosGanados} pts` : `PUNTOS PERDIDOS: ${puntosGanados} pts (Sin DNI)`}
+----------------------------------------
+DETALLE DE COMPRA:
+${listaConcepto}----------------------------------------
+Subtotal: S/ ${subtotalRegular.toFixed(2)}
+Ahorro por mayor: -S/ ${ahorroTotal.toFixed(2)}
+TOTAL A PAGAR: S/ ${totalFinal.toFixed(2)}
+----------------------------------------
+Pedido generado desde la tienda web de KOSTHER`;
+
+            carrito = {};
+            guardarCarritoLocalStorage();
+            actualizarCarrito();
+
+            const whatsappUrl = `https://wa.me/51966002733?text=${encodeURIComponent(mensaje)}`;
+            window.open(whatsappUrl, '_blank');
+
+            cambiarVistaModal('pedidos');
+        }
+
+        function renderPedidosLista() {
+            const container = document.getElementById('pedidos-lista-container');
+            container.innerHTML = '';
+
+            if (pedidos.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:#777; margin-top:25px; font-weight:600; font-size:0.85rem;">No tienes pedidos registrados.<br>Realiza una compra para confirmar su estado.</p>';
+                return;
+            }
+
+            pedidos.forEach((ped, index) => {
+                let statusClass = 'status-pendiente';
+                if (ped.estado === 'Recibido') statusClass = 'status-recibido';
+                if (ped.estado === 'Cancelado') statusClass = 'status-cancelado';
+
+                let itemsHtml = ped.items.map(it => `<div>• ${it.cantidad}x ${it.nombre} (S/ ${it.precioTotal.toFixed(2)})</div>`).join('');
+
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.innerHTML = `
+                    <div class="order-card-header">
+                        <span>Pedido #${ped.id} (${ped.fecha})</span>
+                        <span class="order-status-tag ${statusClass}">${ped.estado}</span>
+                    </div>
+                    <div style="font-size:0.8rem; color:#444; margin-bottom:8px;">
+                        ${itemsHtml}
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-weight:900; font-size:0.95rem; border-top:1px dashed #ccc; padding-top:6px;">
+                        <span>Total:</span>
+                        <span>S/ ${ped.total.toFixed(2)}</span>
+                    </div>
+                    ${ped.puntos > 0 ? `<div style="font-size:0.75rem; color:${ped.estado === 'Cancelado' ? '#999' : '#0b7a26'}; font-weight:800; margin-top:4px;">${ped.estado === 'Cancelado' ? 'Puntos revocados por cancelación' : `✓ +${ped.puntos} puntos generados`}</div>` : ''}
+                    
+                    ${ped.estado === 'En preparación' ? `
+                        <div class="order-actions">
+                            <button class="btn-order-action btn-confirmar-recibido" onclick="cambiarEstadoPedido(${index}, 'Recibido')">
+                                <svg class="icon-svg" viewBox="0 0 24 24" style="width:14px; height:14px; stroke:#FFF;">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Ya me llegó
+                            </button>
+                            <button class="btn-order-action btn-cancelar-pedido" onclick="cambiarEstadoPedido(${index}, 'Cancelado')">
+                                Cancelar
+                            </button>
+                        </div>
+                    ` : ''}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Anulación estricta de puntos en caso de cancelación
+        function cambiarEstadoPedido(index, nuevoEstado) {
+            if (!pedidos[index]) return;
+
+            if (nuevoEstado === 'Cancelado' && pedidos[index].puntosAcreditados && pedidos[index].puntos > 0) {
+                let puntosActuales = parseInt(localStorage.getItem('kosther_puntos') || '0', 10);
+                puntosActuales = Math.max(0, puntosActuales - pedidos[index].puntos);
+                localStorage.setItem('kosther_puntos', puntosActuales.toString());
+                pedidos[index].puntosAcreditados = false;
+                actualizarPuntosHeader();
+            }
+
+            pedidos[index].estado = nuevoEstado;
+            guardarPedidosLocalStorage();
+            renderPedidosLista();
+        }
+
+        function iniciarNuevoPedido() {
+            cambiarVistaModal('carrito');
+        }
+
+        // Ocultamiento / Muestra del header en scroll
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const header = document.getElementById('main-header');
+
+            if (currentScrollY > lastScrollY && currentScrollY > 70) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            lastScrollY = currentScrollY;
+        }, { passive: true });
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            inicializarDatosCliente();
+            cargarCarritoLocalStorage();
+            cargarPedidosLocalStorage();
+            actualizarPuntosHeader();
+            renderCatalogo();
+            actualizarCarrito();
+        });
+    </script>
 </body>
 </html>
